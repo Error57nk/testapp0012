@@ -1,0 +1,210 @@
+{% extends 'pstore/base.html'%} {% load static %} {% block title %}Home{%endblock %}
+{% block body %}
+<div class="">
+  <img src="{% static 'images/mbanner.jpg'%}" alt="MainBanner" class="img-fluid" />
+</div>
+<div class="container">
+  {% if catinfo %}
+  <h2 class="mt-5">Picture form {{catinfo}}</h2>
+  {% else %}
+  <h2 class="mt-5">Gallery</h2>
+  {% endif %}
+  <div class="row pt-5 pb-5">
+    {% for pic in data %}
+    <div class="col-md-3">
+      <div class="card mb-3 mt-3">
+        <img class="card-img-top" src="{{pic.photo.url}}" alt="Card image cap" />
+        <div class="card-body">
+          <h5 class="card-title">{{pic.title}}</h5>
+          <p class="card-text">{{pic.desc}}</p>
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-outline-warning btn-block" data-id="{{pic.id}}" data-type="Custom Logo"
+                data-title="{{pic.title}}" onclick="myformLogo(this)">
+                Custom Logo
+              </button>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-warning btn-block" data-id="{{pic.id}}" data-type="Full Custom"
+                data-title="{{pic.title}}" onclick="myform(this)">
+                Full Custom
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+</div>
+
+
+<!-- full -->
+<div class="modal fade" id="fullCustom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title" id="nformtitle">
+          {{request.user|title }} Complete your Order
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4>Order id: <span id="ngid"></span>
+        </h4>
+        <hr>
+        <span>Selected Picture: </span>
+        <label id="phottitleid" class="text-success"></label><br />
+        <small><label id="ctypo" class="text-primary"></label></small>
+        <hr>
+        <form method="POST">
+          {%csrf_token%}
+          <input type="hidden" name="npid" id="npid" />
+          <input type="hidden" name="nctype" value="full" />
+          <div class="mt-3">
+            <label for="changecolor">Change Color: </label>
+            <select name="colorchange" id="changecolor" class="form-control">
+              <option value="nc" selected>No change</option>
+              <option value="Red" class="bg-danger">Red</option>
+              <option value="Green" class="bg-success">Green</option>
+              <option value="Orange" class="bg-warning">Orange</option>
+            </select>
+          </div>
+          <div class="mt-3">
+            <label for="changecolor">Change Font:</label>
+            <select name="fontchange" id="changefont" class="form-control">
+              <option value="nc" selected>No change</option>
+              <option value="opins">Popins</option>
+              <option value="roboto">Roboto</option>
+              <option value="arial">Arial</option>
+            </select>
+          </div>
+          <div class="mt-3">
+            <label for="ncont">Change Content</label>
+            <textarea name="ngetcon" class="form-control" id="ncont" cols="30" rows="3"></textarea>
+          </div>
+          <div class="mt-3">
+            <label for="notit">Note:</label>
+            <input type="text" class="form-control" name="nnote" id="notit" placeholder="Note if any">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" name="fullchange">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- logo -->
+<div class="modal fade" id="logodes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title" id="nformtitle1">
+          {{request.user|title }} Complete your Order
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4>Order id: <span id="ngid1"></span>
+        </h4>
+        <hr>
+        <span>Selected Picture: </span>
+        <label id="phottitleid1" class="text-success"></label><br />
+        <small><label id="ctypo1" class="text-primary"></label></small>
+        <hr>
+        <form method="POST">
+          {%csrf_token%}
+          <input type="hidden" name="npid" id="npid1" />
+          <input type="hidden" name="nctype" value="logo" />
+          <div class="mt-3">
+            <label for="changecolor1">Change Color</label>
+            <select name="colorchange" id="changecolor1" class="form-control">
+              <option value="nc" selected>No change</option>
+              <option value="Red" class="bg-danger">Red</option>
+              <option value="Green" class="bg-success">Green</option>
+              <option value="Orange" class="bg-warning">Orange</option>
+            </select>
+          </div>
+
+          <div class="mt-3">
+            <label for="notit">Note:</label>
+            <input type="text" class="form-control" name="nnote" id="notit" placeholder="Note if any">
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" name="nclogoform">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+<button type="button" style="display: none" data-toggle="modal" data-target="#fullCustom" id="formmodel"></button>
+<button type="button" style="display: none" data-toggle="modal" data-target="#logodes" id="formmodel_logo"></button>
+
+{% endblock %} {% block scripts %}
+
+<script>
+  function myform(obj) {
+    // var thisid = $(obj).attr("id");
+    var type = $(obj).data("type");
+    var picid = $(obj).data("id");
+    var title = $(obj).data("title");
+    console.log("Type--", picid);
+    console.log("Type--", title);
+    let ngid = Math.round(Math.random() * 10000);
+    $("#ngid").text("#fc-" + ngid);
+    console.log("ID--", ngid);
+
+    // label
+    $("#phottitleid").text(title.toUpperCase());
+    $("#ctypo").text(type.toUpperCase());
+    // form
+
+    $("#npid").val(picid);
+
+    $("#formmodel").click();
+  }
+
+  function myformLogo(obj) {
+    // var thisid = $(obj).attr("id");
+    var type = $(obj).data("type");
+    var picid = $(obj).data("id");
+    var title = $(obj).data("title");
+    console.log("Type--", type);
+    console.log("Type--", picid);
+    console.log("Type--", title);
+    let ngid = Math.round(Math.random() * 10000);
+    $("#ngid1").text("#fc-" + ngid);
+    console.log("ID--", ngid);
+
+    // label
+    $("#phottitleid1").text(title.toUpperCase());
+    $("#ctypo1").text(type.toUpperCase());
+    // form
+
+    $("#npid1").val(picid);
+
+
+    $("#formmodel_logo").click();
+  }
+
+
+</script>
+
+{% endblock %}

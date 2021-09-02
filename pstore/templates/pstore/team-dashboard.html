@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% include './includes/header_style.html'%}
+  <title>Dashboard</title>
+</head>
+
+<body>
+  {% load static %}
+  <div class=" " style="background-color: #ff2d6c;">
+    <div class="container-fluid d-flex justify-content-between">
+      <div class="">
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link text-white " href="#"><i class="bi bi-envelope-fill"></i> err57nk@gmail.com</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#"><i class="bi bi-telephone-fill"></i> +91 987654321</a>
+          </li>
+        </ul>
+
+      </div>
+      <div class="">
+        <ul class="nav justify-content-end">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-white " href="{% url 'home' %}"><i class="bi bi-house-fill"></i> Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'logout'%}"><i class="bi bi-person-fill"></i> Logout</a>
+          </li>
+          {%else%}
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'login_request'%}"><i class="bi bi-person-fill"></i> Login</a>
+          </li>
+          {% endif %}
+        </ul>
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- accrd -->
+  <div class="container mt-4 mb-4">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card text-white bg-dark mb-3 mt-3">
+          <div class="card-title card-header font-weight-bold text-center">TOTAL TASK</div>
+          <div class="card-body">
+            <h1 class="card-title text-center">{{count}}</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3 mt-3">
+          <div class="card-title card-header font-weight-bold text-center">TASK OPEN</div>
+          <div class="card-body">
+            <h1 class="card-title text-center">3</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3 mt-3">
+          <div class="card-title card-header font-weight-bold text-center">INPROGRESS</div>
+          <div class="card-body">
+            <h1 class="card-title text-center">1</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-success mb-3 mt-3">
+          <div class="card-title card-header font-weight-bold text-center">COMPLETED</div>
+          <div class="card-body">
+            <h1 class="card-title text-center">1</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /accrd -->
+
+
+  <!-- task assigned -->
+  <div class="container">
+    <hr>
+    <h2>{{request.user.username|capfirst}}'s Assigned Task</h2>
+    <hr>
+    <div class="">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">SL No.</th>
+            <th scope="col">Order Id</th>
+            <th scope="col">Date</th>
+            <th scope="col">Task</th>
+            <th scope="col">Status</th>
+            <th scope="col">Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-danger">
+            <th scope="row">1</th>
+            <th scope="row">#kt-6243</th>
+            <td>27 July 2021</td>
+            <td>Otto Make Over</td>
+            <td class="text-danger">Pending</td>
+            <td>
+              <div class="input-group">
+                <select class="custom-select" id="inputGroupSelect04">
+                  <option selected>Choose...</option>
+                  <option value="1">Pending</option>
+                  <option value="2">In Progress</option>
+                  <option value="3">Completed</option>
+                  <option value="3">Send for Approve</option>
+                </select>
+                <div class="input-group-append">
+                  <button class="btn btn-secondary" type="button">Update</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="table-warning">
+            <th scope="row">2</th>
+            <th scope="row">#hl-2151</th>
+            <td>22 July 2021</td>
+            <td>Thornton Theam Decor</td>
+            <td>In progress</td>
+            <td>
+              <div class="input-group">
+                <select class="custom-select" id="inputGroupSelect04">
+                  <option selected>Choose...</option>
+                  <option value="1">Pending</option>
+                  <option value="2">In Progress</option>
+                  <option value="3">Completed</option>
+                  <option value="3">Send for Approve</option>
+                </select>
+                <div class="input-group-append">
+                  <button class="btn btn-secondary" type="button">Update</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="table-success">
+            <th scope="row">3</th>
+            <th scope="row">#bk-8647</th>
+            <td>21 July 2021</td>
+            <td>the Bird Shadow</td>
+            <td class="text-success">Completed</td>
+            <td>
+              <div class="input-group">
+                <select class="custom-select" id="inputGroupSelect04">
+                  <option selected>Choose...</option>
+                  <option value="1">Pending</option>
+                  <option value="2">In Progress</option>
+                  <option value="3">Completed</option>
+                  <option value="3">Send for Approve</option>
+                </select>
+                <div class="input-group-append">
+                  <button class="btn btn-secondary" type="button">Update</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <hr>
+    <h2>Task For Approve</h2>
+    <div class="row">
+      {%for t in ass %}
+      <div class="col-md-4">
+        <div class="card text-dark mb-3 mt-3">
+          <div class="card-title card-header font-weight-bold text-center">{{t.photoid}}</div>
+          <div class="card-body">
+            <p>Design Type: {{t.custType}}</p>
+            <p>Recived on: {{t.date}}</p>
+            <div class="row">
+              <div class="col-md-6">
+                <button class="btn btn-primary btn-block">View Detail</button>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-success btn-block" data-did="down_{{t.id}}"
+                  onclick="dowCon(this)">Accept</button>
+                <a href="{{ t.photoid.photo.url }}" class="d-none btn btn-warning btn-block text-white disabled"
+                  id="down_{{t.id}}" download>Download</a>
+              </div>
+              <!--  -->
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
+
+
+  <!-- /task assigned -->
+
+  <div class="container">
+    <hr>
+    <p>
+      Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+      literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+      College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+      going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes
+      from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
+      written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first
+      line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+    </p>
+    <hr>
+  </div>
+
+
+  {% include './footer.html'%}
+  <script>
+    const dowCon = d => { let a = $(d).data("did"); $(d).addClass("d-none"), $("#" + a).removeClass("d-none disabled") };
+  </script>
+</body>
+
+</html>

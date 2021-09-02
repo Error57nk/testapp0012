@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico'%}" type="image/x-icon" />
+
+  {% include './includes/header_style.html'%}
+  <title>{% block title%} {% endblock %} | PhotoWorld</title>
+</head>
+<style>
+  .ncenter {
+    display: flex;
+    margin-top: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nbox {
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 3px 3px #ccc;
+  }
+
+  .nnav li {
+    font-size: 18px !important;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+</style>
+
+<body>
+  {% include './header.html' %} {% block body %} {% endblock %}
+  {% include './footer.html' %} {% block scripts %}{% endblock %}
+</body>
+
+</html>

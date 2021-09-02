@@ -1,0 +1,88 @@
+{% load static %}
+<div class="container-fluid ">
+  <div class="d-flex justify-content-between">
+    <div class="">
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link text-dark " href="#"><i class="bi bi-envelope-fill"></i> err57nk@gmail.com</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="#"><i class="bi bi-telephone-fill"></i> +91 987654321</a>
+        </li>
+      </ul>
+
+    </div>
+    <div class="">
+      <ul class="nav justify-content-end">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link text-dark " href="{% url 'team_dash' %}"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{% url 'logout'%}"><i class="bi bi-person-fill"></i> Logout</a>
+        </li>
+        {%else%}
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{% url 'login_request'%}"><i class="bi bi-person-fill"></i> Login</a>
+        </li>
+        {% endif %}
+      </ul>
+
+
+    </div>
+  </div>
+</div>
+<div class="" style="background-color: #ff2d6c;">
+  <div class="container">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png'%}" alt="frontroot"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto nnav">
+          <li class="nav-item active">
+            <a class="nav-link text-white" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Design</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Festivals
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for c in cat %}
+              <a class="dropdown-item" href="/?catid={{c.id}}">{{c.cat|upper}}*</a>
+              {% endfor %}
+              <a class="dropdown-item" href="#">Diwali</a>
+              <a class="dropdown-item" href="#">Holi </a>
+              <a class="dropdown-item" href="#">Janmashtami </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="#">Ads</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="#">Vedio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="#">Conatct</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
+      </div>
+    </nav>
+  </div>
+</div>
